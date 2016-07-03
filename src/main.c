@@ -1,5 +1,11 @@
-#include <stdio.h>
+#ifdef F_CPU
+#undef F_CPU
+#endif
+
+#define F_CPU 16000000
+
 #include <avr/io.h>
+#include <stdio.h>
 #include <util/delay.h>
 
 static int uart_putchar(char c, FILE *stream) {
@@ -11,7 +17,7 @@ static int uart_putchar(char c, FILE *stream) {
 
 static FILE serialout = FDEV_SETUP_STREAM(uart_putchar, NULL, _FDEV_SETUP_WRITE);
 
-#define BLINK_DELAY_MS 1000
+#define BLINK_DELAY_MS 100
  
 int main (void)
 {
